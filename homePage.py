@@ -20,9 +20,6 @@ st.set_page_config(
     layout="wide"
 )
 
-with open("styles.css") as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
 pd.set_option('display.float_format', lambda x: '%.3f' % x)
 st.image("https://erp15.nomin.mn/web/image/125495-0f10b8a0/%D0%9D%D0%BE%D0%BC%D0%B8%D0%BD%20%D0%9B%D0%BE%D0%B3%D0%BE.png", width=150)  # Adjust width as needed
 
