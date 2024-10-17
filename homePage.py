@@ -53,7 +53,7 @@ if st.session_state.active_tab == tab_names[0]:
         xpart2 = pd.read_csv('data/purchaseData_category2.csv')
         xpart3 = pd.read_csv('data/purchaseData_category3.csv')
         xpart4 = pd.read_csv('data/purchaseData_category4.csv')
-        pdf = pd.concat([part1, part2, part3, part4], ignore_index=True)
+        pdf = pd.concat([xpart1, xpart2, xpart3, xpart4], ignore_index=True)
     
         odf.columns = ['year',
         'day',
@@ -244,7 +244,7 @@ elif st.session_state.active_tab == tab_names[1]:
         xpart2 = pd.read_csv('data/purchaseData_category2.csv')
         xpart3 = pd.read_csv('data/purchaseData_category3.csv')
         xpart4 = pd.read_csv('data/purchaseData_category4.csv')
-        pdf = pd.concat([part1, part2, part3, part4], ignore_index=True)
+        pdf = pd.concat([xpart1, xpart2, xpart3, xpart4], ignore_index=True)
         odf.columns = ['year',
         'day',
         'customer',
