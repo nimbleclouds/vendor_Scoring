@@ -45,8 +45,19 @@ st.session_state.active_tab = selected_tab
         
 if st.session_state.active_tab == tab_names[0]:
         st.markdown("<br>", unsafe_allow_html=True)
-        odf = pd.read_csv('data/orderData_category.csv')
-        pdf = pd.read_csv('data/purchaseData_category.csv')
+
+        part1 = pd.read_csv('data/orderData_category1.csv')
+        part2 = pd.read_csv('data/orderData_category2.csv')
+        part3 = pd.read_csv('data/orderData_category3.csv')
+        part4 = pd.read_csv('data/orderData_category4.csv')
+        odf = pd.concat([part1, part2, part3, part4], ignore_index=True)
+
+        xpart1 = pd.read_csv('data/purchaseData_category1.csv')
+        xpart2 = pd.read_csv('data/purchaseData_category2.csv')
+        xpart3 = pd.read_csv('data/purchaseData_category3.csv')
+        xpart4 = pd.read_csv('data/purchaseData_category4.csv')
+        pdf = pd.concat([part1, part2, part3, part4], ignore_index=True)
+    
         odf.columns = ['year',
         'day',
         'customer',
@@ -226,8 +237,17 @@ if st.session_state.active_tab == tab_names[0]:
         st.plotly_chart(fig, use_container_width=True)
 elif st.session_state.active_tab == tab_names[1]:
         st.markdown("<br>", unsafe_allow_html=True)
-        odf = pd.read_csv('data/orderData_category.csv')
-        pdf = pd.read_csv('data/purchaseData_category.csv')
+        part1 = pd.read_csv('data/orderData_category1.csv')
+        part2 = pd.read_csv('data/orderData_category2.csv')
+        part3 = pd.read_csv('data/orderData_category3.csv')
+        part4 = pd.read_csv('data/orderData_category4.csv')
+        odf = pd.concat([part1, part2, part3, part4], ignore_index=True)
+
+        xpart1 = pd.read_csv('data/purchaseData_category1.csv')
+        xpart2 = pd.read_csv('data/purchaseData_category2.csv')
+        xpart3 = pd.read_csv('data/purchaseData_category3.csv')
+        xpart4 = pd.read_csv('data/purchaseData_category4.csv')
+        pdf = pd.concat([part1, part2, part3, part4], ignore_index=True)
         odf.columns = ['year',
         'day',
         'customer',
