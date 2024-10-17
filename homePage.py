@@ -676,7 +676,7 @@ elif st.session_state.active_tab == tab_names[2]:
     n_clusters = 5
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     kmeans.fit(X_pca)
-    filtered_df_cluster['Cluster'] = kmeans.labels
+    filtered_df_cluster['Cluster'] = kmeans.labels_
     
     filtered_df_cluster['profit'] = filtered_df_cluster['profit'].astype('int64')
     if 'weights_cluster' not in st.session_state:
