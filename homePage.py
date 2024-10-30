@@ -495,7 +495,7 @@ elif st.session_state.active_tab == tab_names[1]:
                                          filtered_df[filtered_df['customer'] == selected_customer]['category'].unique())
             customer_row = fil_df[fil_df.category == selected_cat].iloc[0]
             st.divider()
-           metrics = customer_row['metric_array']
+        metrics = customer_row['metric_array']
         scaled_score = customer_row['score']
         avg_score = customer_row['cat_avg_score']
         color = 'lightgreen' if scaled_score > avg_score else '#f1807e'
