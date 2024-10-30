@@ -494,7 +494,7 @@ elif st.session_state.active_tab == tab_names[1]:
             selected_cat = st.selectbox("Ангилал сонгох", 
                                          filtered_df[filtered_df['customer'] == selected_customer]['category'].unique())
             customer_row = fil_df[fil_df.category == selected_cat].iloc[0]
-            st.divider()
+        st.divider()
         metrics = customer_row['metric_array']
         scaled_score = customer_row['score']
         avg_score = customer_row['cat_avg_score']
@@ -502,25 +502,23 @@ elif st.session_state.active_tab == tab_names[1]:
         st.header("Харилцагчийн дүн")
         st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
         st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
-
-    
         cols = st.columns(len(metrics))
-         metrics = customer_row['metric_array']
-            scaled_score = customer_row['score']
-            avg_score = customer_row['cat_avg_score']
-            color = 'lightgreen' if scaled_score > avg_score else '#f1807e'
-            st.header(f"Харилцагчийн дүн")
-            st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
-            st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
-            cols = st.columns(len(metrics))
-            metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
-            avg_metrics = customer_row['avg_metric_array']
-            for col, label, value, avg_value in zip(cols, metric_labels, metrics, avg_metrics):
-                whole_percentage = float(value)  # Convert to whole number
-                avg_percentage = float(avg_value)  # Convert average to whole number
-                delta = whole_percentage - avg_percentage
-                delta_color = "normal" if delta == 0 else ("inverse" if delta < 0 else "normal")
-                col.metric(label=label, value=f"{whole_percentage:.2f}%", delta=f"{delta:.2f}%", delta_color=delta_color)
+        metrics = customer_row['metric_array']
+        scaled_score = customer_row['score']
+        avg_score = customer_row['cat_avg_score']
+        color = 'lightgreen' if scaled_score > avg_score else '#f1807e'
+        st.header(f"Харилцагчийн дүн")
+        st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
+        st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
+        cols = st.columns(len(metrics))
+        metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
+        avg_metrics = customer_row['avg_metric_array']
+        for col, label, value, avg_value in zip(cols, metric_labels, metrics, avg_metrics):
+            whole_percentage = float(value)  # Convert to whole number
+            avg_percentage = float(avg_value)  # Convert average to whole number
+            delta = whole_percentage - avg_percentage
+            delta_color = "normal" if delta == 0 else ("inverse" if delta < 0 else "normal")
+            col.metric(label=label, value=f"{whole_percentage:.2f}%", delta=f"{delta:.2f}%", delta_color=delta_color)
             st.divider()
             s_cf = fil_df[fil_df.category == selected_cat]
             s_cf = s_cf[['customer', 'category', 'divcnt', 'skucnt', 'purchasecnt', 'inqty',
