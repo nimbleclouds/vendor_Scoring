@@ -495,22 +495,32 @@ elif st.session_state.active_tab == tab_names[1]:
                                          filtered_df[filtered_df['customer'] == selected_customer]['category'].unique())
             customer_row = fil_df[fil_df.category == selected_cat].iloc[0]
             st.divider()
-            metrics = customer_row['metric_array']
-            scaled_score = customer_row['score']
-            avg_score = customer_row['cat_avg_score']
-            color = 'lightgreen' if scaled_score > avg_score else '#f1807e'
-            st.header(f"Харилцагчийн дүн")
-            st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
-            st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
-            cols = st.columns(len(metrics))
-            metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
-            avg_metrics = customer_row['avg_metric_array']
-            for col, label, value, avg_value in zip(cols, metric_labels, metrics, avg_metrics):
-                whole_percentage = float(value)  # Convert to whole number
-                avg_percentage = float(avg_value)  # Convert average to whole number
-                delta = whole_percentage - avg_percentage
-                delta_color = "normal" if delta == 0 else ("inverse" if delta < 0 else "normal")
-                col.metric(label=label, value=f"{whole_percentage:.2f}%", delta=f"{delta:.2f}%", delta_color=delta_color)
+           metrics = customer_row['metric_array']
+        scaled_score = customer_row['score']
+        avg_score = customer_row['cat_avg_score']
+        color = 'lightgreen' if scaled_score > avg_score else '#f1807e'
+        st.header("Харилцагчийн дүн")
+        st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
+        st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
+        cols = st.columns(len(metrics))
+        metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
+        avg_metrics = customer_row['avg_metric_array']
+        
+        for col, label, value, avg_value in zip(cols, metric_labels, metrics, avg_metrics):
+            whole_percentage = float(value)  # Convert to whole number
+            avg_percentage = float(avg_value)  # Convert average to whole number
+            delta = whole_percentage - avg_percentage
+        
+            # Update delta_color logic
+            if delta > 0:
+                delta_color = "normal"  # Positive difference
+            elif delta < 0:
+                delta_color = "inverse"  # Negative difference
+            else:
+                delta_color = "normal"  # No change can be treated as neutral
+        
+            # Set the metric with the appropriate delta color
+            col.metric(label=label, value=f"{whole_percentage:.2f}%", delta=f"{delta:.2f}%", delta_color=delta_color)
             st.divider()
             s_cf = fil_df[fil_df.category == selected_cat]
             s_cf = s_cf[['customer', 'category', 'divcnt', 'skucnt', 'purchasecnt', 'inqty',
@@ -797,12 +807,23 @@ elif st.session_state.active_tab == tab_names[2]:
             cols_cluster = st.columns(len(metrics_cluster))
             metric_labels_cluster = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
             avg_metrics_cluster = customer_row_cluster['metrics_percentages_avg']
+            
             for col, label, value, avg_value in zip(cols_cluster, metric_labels_cluster, metrics_cluster, avg_metrics_cluster):
                 whole_percentage = float(value) * 100  # Convert to whole number
-                avg_percentage = float(avg_value) * 100 # Convert average to whole number
+                avg_percentage = float(avg_value) * 100  # Convert average to whole number
                 delta = whole_percentage - avg_percentage
-                delta_color = "normal" if delta == 0 else ("inverse" if delta < 0 else "normal")
+            
+                # Update delta_color logic
+                if delta > 0:
+                    delta_color = "normal"  # Positive difference
+                elif delta < 0:
+                    delta_color = "inverse"  # Negative difference
+                else:
+                    delta_color = "normal"  # No change can be treated as neutral
+            
+                # Set the metric with the appropriate delta color
                 col.metric(label=label, value=f"{whole_percentage:.2f}%", delta=f"{delta:.2f}%", delta_color=delta_color)
+            
             st.divider()
             
             
