@@ -495,12 +495,12 @@ elif st.session_state.active_tab == tab_names[1]:
     		customers_in_category = filtered_df[filtered_df['category'] == selected_cat]['customer'].unique()
     		selected_customer = st.selectbox("customer", customers_in_category)
     		if selected_customer:
-       			st.session_state.selected_customer = selected_customer  # Store selected customer in session state
-      		  fil_df = filtered_df[filtered_df.customer == selected_customer]
+       			 st.session_state.selected_customer = selected_customer  # Store selected customer in session state
+      		         fil_df = filtered_df[filtered_df.customer == selected_customer]
         
-            customer_row = fil_df.iloc[0]  # Get the first row for the selected customer
-            #######HERE######################
-            st.divider()
+        customer_row = fil_df.iloc[0]  # Get the first row for the selected customer
+        #######HERE######################
+        st.divider()
             st.divider()
             metrics = customer_row['metric_array']
             scaled_score = customer_row['score']
