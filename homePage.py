@@ -389,7 +389,7 @@ elif st.session_state.active_tab == tab_names[1]:
             'avg_error': "Алдаатай захиалгын хувь",
             'divcnt': "Нийлүүлдэг салбаруудын тоо",
             'skucnt': "Нийлүүлдэг SKU тоо",
-            'avgcomiss': "Дундаж GP"
+            'avgcomiss': "Дундаж Commission"
         }
         def scale_within_category(group):
             if len(group) > 1:
@@ -437,7 +437,7 @@ elif st.session_state.active_tab == tab_names[1]:
             "Алдаатай захиалгын хувь": "avg_error",
             "Нийлүүлдэг салбаруудын тоо": "divcnt",
             "Нийлүүлдэг SKU тоо": "skucnt",
-            "Дундаж GP": "avgcomiss",
+            "Дундаж Commission": "avgcomiss",
         }
         if st.sidebar.button("Хадгалах"):
             for key in weights.keys():
@@ -454,7 +454,7 @@ elif st.session_state.active_tab == tab_names[1]:
             "Алдаатай захиалгын хувь": "avg_error",
             "Нийлүүлдэг салбаруудын тоо": "divcnt",
             "Нийлүүлдэг SKU тоо": "skucnt",
-            "Дундаж GP": "avgcomiss",
+            "Дундаж Commission": "avgcomiss",
         }
         options = list(metrics_mapping.keys())
         valid_defaults = [item for item in st.session_state.selected_metrics if item in options]
@@ -503,7 +503,7 @@ elif st.session_state.active_tab == tab_names[1]:
             st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
             st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
             cols = st.columns(len(metrics))
-            metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "GP"]
+            metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
             avg_metrics = customer_row['avg_metric_array']
             for col, label, value, avg_value in zip(cols, metric_labels, metrics, avg_metrics):
                 whole_percentage = float(value)  # Convert to whole number
@@ -519,7 +519,7 @@ elif st.session_state.active_tab == tab_names[1]:
             s_cf.columns = ['Харилцагч', 'Ангилал', 'Салбарын тоо',
                              'Барааны тоо', 'ХА тоо',
                              'ХА-аар орсон барааны тоо ширхэг', 'Захиалсан барааны тоо ширхэг',
-                             'Нийт ашиг', 'Дундаж GP', 'Дундаж үнэ', 'Орлогын дүн', 'Татвар орсон орлогын дүн', 
+                             'Нийт ашиг', 'Дундаж Commission', 'Дундаж үнэ', 'Орлогын дүн', 'Татвар орсон орлогын дүн', 
                              'Зөрүүтэй барааны тоо ширхэг', 'Зөрүүтэй ХА-ын тоо',
                              'Гараар орсон захиалга', 'Автомат захиалга', 'Ирэх хугацааны дундаж (хоног)', 'Зөрүүний дундаж']
 
@@ -550,7 +550,7 @@ elif st.session_state.active_tab == tab_names[1]:
                                           text='Оноо')
             fig_relative_scores.update_traces(textfont_size=14, textposition='inside')
             st.plotly_chart(fig_relative_scores)
-            metrics_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "GP"]
+            metrics_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
             customer_metrics = customer_row['metric_array']
             avg_metrics = customer_row['avg_metric_array']
             data = {
@@ -595,7 +595,7 @@ elif st.session_state.active_tab == tab_names[1]:
             fdf_mn.columns = ['Харилцагч','Ангилал','Салбарын тоо',
                                 'Барааны тоо','ХА тоо',
                                 'ХА-аар орсон барааны тоо ширхэг','Захиалсан барааны тоо ширхэг',
-                                 'Нийт ашиг','Дундаж GP','Дундаж үнэ','Орлогын дүн','Татвар орсон орлогын дүн','Зөрүүтэй барааны тоо ширхэг','Зөрүүтэй ХА-ын тоо',
+                                 'Нийт ашиг','Дундаж Commission','Дундаж үнэ','Орлогын дүн','Татвар орсон орлогын дүн','Зөрүүтэй барааны тоо ширхэг','Зөрүүтэй ХА-ын тоо',
                                  'Гараар орсон захиалга','Автомат захиалга','Ирэх хугацааны дундаж (хоног)','Зөрүүний дундаж','Оноо','Сонгогдсон']
             st.dataframe(fdf_mn)                       
         with st.expander("Тусгаарласан харилцагчид:"):
@@ -721,7 +721,7 @@ elif st.session_state.active_tab == tab_names[2]:
         'avg_error': "Алдаатай захиалгын хувь",
         'divcnt': "Нийлүүлдэг салбаруудын тоо",
         'skucnt': "Нийлүүлдэг SKU тоо",
-        'avgcomiss': "Дундаж GP"
+        'avgcomiss': "Дундаж Commission"
     }
     st.title("Ханган нийлүүлэгчийн бүлгийн динамик үнэлгээ")
     st.sidebar.header("Жин тохируулах - Бүлэг")
@@ -795,7 +795,7 @@ elif st.session_state.active_tab == tab_names[2]:
             st.markdown(f"<h1 style='color: {color_cluster};'>{scaled_score_cluster:.2f}%</h1>", unsafe_allow_html=True)
             st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
             cols_cluster = st.columns(len(metrics_cluster))
-            metric_labels_cluster = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "GP"]
+            metric_labels_cluster = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
             avg_metrics_cluster = customer_row_cluster['metrics_percentages_avg']
             for col, label, value, avg_value in zip(cols_cluster, metric_labels_cluster, metrics_cluster, avg_metrics_cluster):
                 whole_percentage = float(value) * 100  # Convert to whole number
@@ -810,7 +810,7 @@ elif st.session_state.active_tab == tab_names[2]:
             s_cf_cluster.columns = ['Харилцагч','Салбарын тоо',
                                 'Барааны тоо','ХА тоо',
                                 'ХА-аар орсон барааны тоо ширхэг','Захиалсан барааны тоо ширхэг',
-                                 'Нийт ашиг','Дундаж GP','Дундаж үнэ','Орлогын дүн','Татварын дараах орлогын дүн','Зөрүүтэй барааны тоо ширхэг','Зөрүүтэй ХА-ын тоо',
+                                 'Нийт ашиг','Дундаж Commission','Дундаж үнэ','Орлогын дүн','Татварын дараах орлогын дүн','Зөрүүтэй барааны тоо ширхэг','Зөрүүтэй ХА-ын тоо',
                                  'Гараар орсон захиалга','Автомат захиалга','Ирэх хугацааны дундаж (хоног)','Зөрүүний дундаж','Хамрагдах бүлэг'
                                 ]
             expander_cluster = st.expander("Харилцагчийн мэдээлэл харах", expanded=True)  # You can set expanded to True or False
@@ -843,7 +843,7 @@ elif st.session_state.active_tab == tab_names[2]:
                                           text='Оноо')
             fig_relative_scores_cluster.update_traces(textfont_size=14, textposition='inside')
             st.plotly_chart(fig_relative_scores_cluster)
-            metrics_labels_cluster = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "GP"]
+            metrics_labels_cluster = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
             customer_metrics_cluster = customer_row_cluster['metrics_percentages']
             avg_metrics_cluster = customer_row_cluster['metrics_percentages_avg']
             data_cluster = {
@@ -892,7 +892,7 @@ elif st.session_state.active_tab == tab_names[2]:
             f_Clust.columns = ['Харилцагч','Салбарын тоо',
                                 'Барааны тоо','ХА тоо',
                                 'ХА-аар орсон барааны тоо ширхэг','Захиалсан барааны тоо ширхэг',
-                                 'Нийт ашиг','Дундаж GP','Дундаж үнэ','Орлогын дүн','Татварын дараах орлогын дүн','Зөрүүтэй барааны тоо ширхэг','Зөрүүтэй ХА-ын тоо',
+                                 'Нийт ашиг','Дундаж Commission','Дундаж үнэ','Орлогын дүн','Татварын дараах орлогын дүн','Зөрүүтэй барааны тоо ширхэг','Зөрүүтэй ХА-ын тоо',
                                  'Гараар орсон захиалга','Автомат захиалга','Ирэх хугацааны дундаж (хоног)','Зөрүүний дундаж','Хамрагдах бүлэг','Оноо'
                                 ]
             st.write(f_Clust)   
