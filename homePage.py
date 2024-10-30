@@ -503,14 +503,6 @@ elif st.session_state.active_tab == tab_names[1]:
         st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
         st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
         cols = st.columns(len(metrics))
-        metrics = customer_row['metric_array']
-        scaled_score = customer_row['score']
-        avg_score = customer_row['cat_avg_score']
-        color = 'lightgreen' if scaled_score > avg_score else '#f1807e'
-        st.header(f"Харилцагчийн дүн")
-        st.markdown(f"<h1 style='color: {color};'>{scaled_score * 100:.2f}%</h1>", unsafe_allow_html=True)
-        st.subheader("Харилцагчийн KPI үзүүлэлтүүд")
-        cols = st.columns(len(metrics))
         metric_labels = ["Ашиг", "ХА", "PO", "Хугацаа", "Алдаа", "Салбар", "SKU", "Commission"]
         avg_metrics = customer_row['avg_metric_array']
         for col, label, value, avg_value in zip(cols, metric_labels, metrics, avg_metrics):
