@@ -487,20 +487,13 @@ elif st.session_state.active_tab == tab_names[1]:
         avg_metric_array['avg_metric_array'] = avg_metric_array.iloc[:, 1:].values.tolist()
         filtered_df = filtered_df.merge(avg_scores, on='category', how='left')
         filtered_df = filtered_df.merge(avg_metric_array[['category', 'avg_metric_array']], on='category', how='left')
-        # Select category first
-	selected_cat = st.selectbox("Ангилал сонгох", filtered_df['category'].unique())
-
-	if selected_cat:
-   		 # Filter customers based on the selected category
-    		customers_in_category = filtered_df[filtered_df['category'] == selected_cat]['customer'].unique()
-    		selected_customer = st.selectbox("customer", customers_in_category)
-    		if selected_customer:
-       			 st.session_state.selected_customer = selected_customer  # Store selected customer in session state
-      		         fil_df = filtered_df[filtered_df.customer == selected_customer]
-        
-        customer_row = fil_df.iloc[0]  # Get the first row for the selected customer
-        #######HERE######################
-        st.divider()
+        selected_customer = st.selectbox("Харилцагч", filtered_df.customer.unique(), index=0 if 'selected_customer' not in st.session_state else filtered_df.customer.unique().tolist().index(st.session_state.selected_customer))
+        if selected_customer:
+            st.session_state.selected_customer = selected_customer  # Store selected customer in session state
+            fil_df = filtered_df[filtered_df.customer == selected_customer]
+            selected_cat = st.selectbox("Ангилал сонгох", 
+                                         filtered_df[filtered_df['customer'] == selected_customer]['category'].unique())
+            customer_row = fil_df[fil_df.category == selected_cat].iloc[0]
             st.divider()
             metrics = customer_row['metric_array']
             scaled_score = customer_row['score']
